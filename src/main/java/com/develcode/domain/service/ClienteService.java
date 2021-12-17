@@ -21,8 +21,6 @@ public class ClienteService {
 
     public ResponseEntity<Cliente> salvarCliente(Cliente cliente) {
 
-        validacoes();
-
         Cliente clienteSalvo = repository.save(cliente);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
@@ -35,9 +33,10 @@ public class ClienteService {
 
     public Cliente buscarClientePorId(Long id) {
         return repository.findById(id).orElseThrow(
-                () -> new EntidadeNaoEncontradaException(String.format("Não foi possivel localizar o cliente com o id %d", id))
+                () -> new EntidadeNaoEncontradaException(
+                        String.format("Não foi possivel localizar o cliente com o id %d", id)
+                )
         );
-
     }
 
     public void salvarImagemCliente(Long id, MultipartFile file) throws IOException {
@@ -59,16 +58,15 @@ public class ClienteService {
         int i = imagens.length;
         String formato = imagens[i - 1];
 
+        if(formato.isEmpty()){
+            throw new FormatoImagemInvalidoException("É obrigatorio o envio de uma imagem");
+        }
+
         if (!formato.equals("jpg")) {
             throw new FormatoImagemInvalidoException(
                     String.format("Formato de mídia inválido, está enviando um ." +
                             "%s e só aceita-se o formato .jpg", formato));
         }
-    }
-
-
-    void validacoes() {
-
     }
 
     public byte[] getImage(Long id) {
