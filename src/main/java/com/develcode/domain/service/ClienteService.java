@@ -16,6 +16,7 @@ import java.util.Objects;
 
 @Service
 public class ClienteService {
+
     @Autowired
     private ClienteRepository repository;
 
@@ -34,7 +35,7 @@ public class ClienteService {
     public Cliente buscarClientePorId(Long id) {
         return repository.findById(id).orElseThrow(
                 () -> new EntidadeNaoEncontradaException(
-                        String.format("Não foi possivel localizar o cliente com o id %d", id)
+                        String.format("Não foi possível localizar o cliente com o id %d", id)
                 )
         );
     }
@@ -54,18 +55,17 @@ public class ClienteService {
 
     private void validarFormatoImagem(String imagem) {
         String[] imagens = imagem.split("\\.");
-
         int i = imagens.length;
-        String formato = imagens[i - 1];
+        String formatoImagem = imagens[i - 1];
 
-        if(formato.isEmpty()){
+        if(formatoImagem.isEmpty()){
             throw new FormatoImagemInvalidoException("É obrigatorio o envio de uma imagem");
         }
 
-        if (!formato.equals("jpg")) {
+        if (!formatoImagem.equals("jpg")) {
             throw new FormatoImagemInvalidoException(
                     String.format("Formato de mídia inválido, está enviando um ." +
-                            "%s e só aceita-se o formato .jpg", formato));
+                            "%s e só aceita-se o formato .jpg", formatoImagem));
         }
     }
 
