@@ -61,6 +61,12 @@ public class ClienteController {
     }
 
 
+    /**
+     * Retorna a imagem no formado .jpg
+     *
+     * @param id codigo do cliente
+     * @return imagem.jpg
+     */
     @GetMapping(value = "/file/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
         byte[] image = service.getImage(id);
