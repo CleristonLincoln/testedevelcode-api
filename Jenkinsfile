@@ -7,7 +7,15 @@ pipeline {
                 echo 'teste'
             }
         }
+    
 
+
+         stage('create image dockerhub') {
+             steps {
+                 script {
+                    dockekerapp = docker.build('api-jenkins', '-f .Dockerfile .')
+                 }
+             }
+         }
     }
-
 }
