@@ -13,7 +13,7 @@ pipeline {
          stage('create image dockerhub') {
              steps {
                  script {
-                    dockekerapp = docker.build('api-jenkins', '-f .Dockerfile .')
+                    dockekerapp = docker.build('Papipi', '-f .Dockerfile .')
                  }
              }
          }
