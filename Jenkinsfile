@@ -12,7 +12,17 @@ pipeline {
         stage('create image dockerhub') {
             steps {
                 script {
-                   dockekerapp = docker.build('cleristonlincoln/Papipi', '-f .Dockerfile .')
+                   dockekerapp = docker.build('cleristonlincoln/teste-develcode', '-f .Dockerfile .')
+                }
+            }
+        }
+
+        stage('push docker image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }
