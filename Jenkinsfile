@@ -8,6 +8,12 @@ pipeline {
                 echo 'teste'
             }
         }
+
+        stage('Build') { 
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
+            }
+        }
     
         stage('create image dockerhub') {
             steps {
