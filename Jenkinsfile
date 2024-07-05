@@ -12,7 +12,7 @@ pipeline {
         stage('create image dockerhub') {
             steps {
                 script {
-                   dockekerapp = docker.build('Papipi', '-f .Dockerfile .')
+                   dockekerapp = docker.build('cleristonlincoln/Papipi', '-f .Dockerfile .')
                 }
             }
         }
